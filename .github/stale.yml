@@ -1,0 +1,11 @@
+daysUntilStale: 28
+daysUntilClose: 14
+# Issues with these labels will never be considered stale
+exemptLabels:
+  - proposal
+  - needs review
+staleLabel: stale
+markComment: >
+  This issue has been automatically marked as stale because it hasn't seen
+  a recent update. It'll be automatically closed in a few days.
+closeComment: false

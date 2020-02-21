@@ -1,0 +1,30 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        go: [ '1.13' ]
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Set up Go
+      uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.go }}
+
+    - name: Run tests
+      shell: bash
+      run: |
+        export GOPATH="$HOME"/go
+        mkdir -p "$GOPATH"/src/github.com/rhodee
+        ln -svf "$PWD" "$GOPATH"/src/github.com/rhodee/svcshell
+        cd "$GOPATH"/src/github.com/rhodee/svcshell
+        go test ./...
+      env:
+        CI: true
